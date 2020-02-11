@@ -1,0 +1,6 @@
+# 开启okhttp方式
+feign:
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true
