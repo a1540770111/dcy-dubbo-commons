@@ -10,7 +10,7 @@
     <artifactId>dcy-common-spring-boot-stater</artifactId>
     <description>公共包</description>
 
-    <!-- 测试 -->
+
     <properties>
         <java.version>1.8</java.version>
         <maven.compile.source>1.8</maven.compile.source>
