@@ -14,6 +14,7 @@ public @interface BindQuery {
 
     /**
      * 查询条件
+     * 无@BindQuery注解默认会映射为=条件
      * @return
      */
     Comparison comparison() default Comparison.EQ;
