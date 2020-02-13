@@ -29,13 +29,6 @@ public class BaseController<Service extends BaseService<Entity>, Entity> {
     @Autowired
     protected Service baseService;
 
-    /**
-     * 分页
-     *
-     * @param pageHelper
-     * @param entity
-     * @return
-     */
     @ApiOperation(value = "分页查询", notes = "分页查询")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageHelper", value = "分页信息", dataType = "PageHelper", paramType = "query"),
@@ -46,18 +39,11 @@ public class BaseController<Service extends BaseService<Entity>, Entity> {
         return ResponseData.success(baseService.pageList(pageHelper, entity));
     }
 
-
-    /**
-     * 查询全部
-     *
-     * @return
-     */
     @ApiOperation(value = "获取全部信息", notes = "获取全部信息")
     @GetMapping(value = "/all")
     public ResponseData<List<Entity>> all() {
         return ResponseData.success(baseService.list());
     }
-
 
     @ApiOperation(value = "根据对象id，查询详细信息", notes = "根据对象id，查询详细信息")
     @GetMapping(value = "/getDetailById")
@@ -65,14 +51,9 @@ public class BaseController<Service extends BaseService<Entity>, Entity> {
             @ApiImplicitParam(name = "id", value = "实体类Id", dataType = "Serializable", paramType = "query")
     })
     public ResponseData<Entity> getEntityById(@RequestParam Serializable id) {
-        return (ResponseData<Entity>) ResponseData.success(baseService.getById(id));
+        return ResponseData.success(baseService.getById(id));
     }
-    /**
-     * 添加
-     *
-     * @param entity
-     * @return
-     */
+
     @ApiOperation(value = "添加", notes = "添加")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "body", dataType = "Entity", name = "entity", value = "对象参数", required = true)
@@ -82,12 +63,6 @@ public class BaseController<Service extends BaseService<Entity>, Entity> {
         return ResponseData.success(baseService.save(entity));
     }
 
-    /**
-     * 修改
-     *
-     * @param entity
-     * @return
-     */
     @ApiOperation(value = "修改", notes = "修改")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "body", dataType = "Entity", name = "entity", value = "对象参数", required = true)
@@ -97,24 +72,12 @@ public class BaseController<Service extends BaseService<Entity>, Entity> {
         return ResponseData.success(baseService.updateById(entity));
     }
 
-    /**
-     * 删除
-     *
-     * @param id
-     * @return
-     */
     @ApiOperation(value = "删除", notes = "删除")
     @PostMapping(value = "/delete")
     public ResponseData<Boolean> delete(@RequestParam Serializable id) {
         return ResponseData.success(baseService.removeById(id));
     }
 
-    /**
-     * 根据idList删除（对应的泛型是基本数据类型）
-     *
-     * @param idList
-     * @return
-     */
     @ApiOperation(value = "根据list删除", notes = "根据list删除")
     @PostMapping(value = "/deleteBatch")
     public ResponseData<Boolean> deleteBatch(@RequestBody Collection<? extends Serializable> idList) {
