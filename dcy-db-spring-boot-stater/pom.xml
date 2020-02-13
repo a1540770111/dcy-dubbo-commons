@@ -23,6 +23,7 @@
         <mybatis-plus.version>3.2.0</mybatis-plus.version>
         <hutool.version>4.6.1</hutool.version>
         <swagger.version>1.5.23</swagger.version>
+        <soul-client-springcloud.version>2.1.2-RELEASE</soul-client-springcloud.version>
     </properties>
 
     <dependencies>
@@ -50,7 +51,13 @@
             <artifactId>dcy-common-spring-boot-stater</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-
+        <!-- 网关 -->
+        <dependency>
+            <groupId>org.dromara</groupId>
+            <artifactId>soul-client-springcloud</artifactId>
+            <version>${soul-client-springcloud.version}</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
 
