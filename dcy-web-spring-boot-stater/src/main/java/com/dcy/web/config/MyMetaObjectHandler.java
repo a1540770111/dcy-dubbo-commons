@@ -3,6 +3,7 @@ package com.dcy.web.config;
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
+import com.dcy.common.context.BaseContextHandler;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
 
@@ -18,13 +19,13 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
 
     @Override
     public void insertFill(MetaObject metaObject) {
-//        this.setInsertFieldValByName("createBy", BaseContextHandler.getUserID(), metaObject);
-        this.setInsertFieldValByName("createDate", DateUtil.format(new Date(), DatePattern.PURE_DATETIME_MS_PATTERN), metaObject);
+        this.setFieldValByName("createBy", BaseContextHandler.getUserID(), metaObject);
+        this.setFieldValByName("createDate", DateUtil.format(new Date(), DatePattern.PURE_DATETIME_MS_PATTERN), metaObject);
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
-//        this.setUpdateFieldValByName("updateBy", BaseContextHandler.getUserID(), metaObject);
-        this.setUpdateFieldValByName("updateDate", DateUtil.format(new Date(), DatePattern.PURE_DATETIME_MS_PATTERN), metaObject);
+        this.setFieldValByName("updateBy", BaseContextHandler.getUserID(), metaObject);
+        this.setFieldValByName("updateDate", DateUtil.format(new Date(), DatePattern.PURE_DATETIME_MS_PATTERN), metaObject);
     }
 }

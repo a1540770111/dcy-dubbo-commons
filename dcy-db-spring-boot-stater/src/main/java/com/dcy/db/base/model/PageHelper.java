@@ -4,6 +4,8 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.dcy.db.base.model.PageData;
+import com.dcy.db.base.model.PageModel;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -65,4 +67,19 @@ public class PageHelper<T> {
         return pagePlus;
     }
 
+    /**
+     * 分页数据转换
+     *
+     * @param page
+     * @return
+     */
+    public PageData<T> toPageDate(IPage<T> page) {
+        PageData<T> pageData = new PageData<>();
+        pageData.setCurrent(page.getCurrent());
+        pageData.setPages(page.getPages());
+        pageData.setRecords(page.getRecords());
+        pageData.setSize(page.getSize());
+        pageData.setTotal(page.getTotal());
+        return pageData;
+    }
 }

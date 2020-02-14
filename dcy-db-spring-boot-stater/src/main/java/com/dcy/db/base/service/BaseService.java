@@ -2,6 +2,7 @@ package com.dcy.db.base.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.dcy.db.base.model.PageData;
 import com.dcy.db.base.model.PageHelper;
 
 import java.io.Serializable;
@@ -95,14 +96,6 @@ public interface BaseService<T> {
     Collection<T> listByIds(Collection<? extends Serializable> idList);
 
     /**
-     * 查询（根据 columnMap 条件）
-     *
-     * @param columnMap 表字段 map 对象
-     */
-    Collection<T> listByMap(Map<String, Object> columnMap);
-
-
-    /**
      * 无条件翻页查询
      *
      * @param page 翻页对象
@@ -117,7 +110,7 @@ public interface BaseService<T> {
      * @param entity     实体类
      * @return
      */
-    IPage<T> pageList(PageHelper<T> pageHelper, T entity);
+    PageData<T> pageList(PageHelper<T> pageHelper, T entity);
 
     /**
      * 查询所有
@@ -127,8 +120,16 @@ public interface BaseService<T> {
     /**
      * 查询所有
      *
-     * @param entity 实体对象
+     * @param entity     实体类
      * @return
      */
     List<T> list(T entity);
+
+    /**
+     * 根据对象查询
+     *
+     * @param entity     实体类
+     * @return
+     */
+    T getOne(T entity);
 }

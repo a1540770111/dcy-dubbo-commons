@@ -1,15 +1,17 @@
 package com.dcy.web.base.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.dcy.db.base.binding.QueryBuilder;
+import com.dcy.db.base.model.PageData;
 import com.dcy.db.base.model.PageHelper;
 import com.dcy.db.base.service.BaseService;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @Author：dcy
@@ -93,24 +95,6 @@ public class BaseServiceImpl<M extends BaseMapper<T>, T> extends ServiceImpl<M, 
     }
 
     /**
-     * 查询所有列表
-     *
-     * @see Wrappers#emptyWrapper()
-     */
-    @Override
-    public List<Map<String, Object>> listMaps() {
-        return super.listMaps();
-    }
-
-    /**
-     * 查询全部记录
-     */
-    @Override
-    public List<Object> listObjs() {
-        return super.listObjs();
-    }
-
-    /**
      * 分页
      *
      * @param pageHelper 分页实体
@@ -118,8 +102,13 @@ public class BaseServiceImpl<M extends BaseMapper<T>, T> extends ServiceImpl<M, 
      * @return
      */
     @Override
-    public IPage<T> pageList(PageHelper<T> pageHelper, T entity) {
-        return super.page(pageHelper.getPagePlus(), Wrappers.query(entity));
+    public PageData<T> pageList(PageHelper<T> pageHelper, T entity) {
+        return pageHelper.toPageDate(super.page(pageHelper.getPagePlus(), Wrappers.query(entity)));
+    }
+
+    @Override
+    public T getOne(T entity) {
+        return super.getOne(Wrappers.query(entity));
     }
 
 }
