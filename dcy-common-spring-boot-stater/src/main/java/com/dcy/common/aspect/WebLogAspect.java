@@ -9,8 +9,13 @@ import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Author：dcy
@@ -49,7 +54,15 @@ public class WebLogAspect {
         if (joinPoint.getArgs().length == 0) {
             operationalLog.setOperParam("{}");
         } else {
-            operationalLog.setOperParam(JSON.toJSONString(joinPoint.getArgs()));
+            List<Object> list = new ArrayList<>();
+            for (Object arg : joinPoint.getArgs()) {
+                // 是否实现校验父接口
+                if (arg instanceof ServletRequest || arg instanceof ServletResponse || arg instanceof MultipartFile) {
+                    continue;
+                }
+                list.add(arg);
+            }
+            operationalLog.setOperParam(JSON.toJSONString(list));
         }
     }
 
@@ -62,6 +75,7 @@ public class WebLogAspect {
         operationalLog.setExeTime(System.currentTimeMillis() - start);
         operationalLog.setError(null);
         operationalLog.setResult(JSON.toJSONString(rvt));
+        BaseContextHandler.remove();
         log.info(LOG_PREFIX+" -=- {}", JSON.toJSONString(operationalLog));
     }
 
