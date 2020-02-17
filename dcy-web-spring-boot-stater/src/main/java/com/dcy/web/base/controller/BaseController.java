@@ -2,7 +2,6 @@ package com.dcy.web.base.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.dcy.common.model.ResponseData;
-import com.dcy.db.base.model.PageHelper;
 import com.dcy.web.base.service.BaseService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -32,18 +31,16 @@ public class BaseController<Service extends BaseService<Entity>, Entity> {
     /**
      * 分页
      *
-     * @param pageHelper
      * @param entity
      * @return
      */
     @ApiOperation(value = "分页查询", notes = "分页查询")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "pageHelper", value = "分页信息", dataType = "PageHelper", paramType = "query"),
             @ApiImplicitParam(name = "entity", value = "查询对象", dataType = "Entity", paramType = "query")
     })
     @GetMapping(value = "/page")
-    public ResponseData<IPage<Entity>> page(PageHelper<Entity> pageHelper, Entity entity) {
-        return ResponseData.success(baseService.pageList(pageHelper, entity));
+    public ResponseData<IPage<Entity>> page(Entity entity) {
+        return ResponseData.success(baseService.pageList(entity));
     }
 
 
@@ -65,8 +62,9 @@ public class BaseController<Service extends BaseService<Entity>, Entity> {
             @ApiImplicitParam(name = "id", value = "实体类Id", dataType = "Serializable", paramType = "query")
     })
     public ResponseData<Entity> getEntityById(@RequestParam Serializable id) {
-        return (ResponseData<Entity>) ResponseData.success(baseService.getById(id));
+        return ResponseData.success(baseService.getById(id));
     }
+
     /**
      * 添加
      *

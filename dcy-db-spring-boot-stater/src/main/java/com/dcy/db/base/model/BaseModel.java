@@ -13,7 +13,7 @@ import java.io.Serializable;
  * @Date: 2019/9/6 13:55
  */
 @Data
-public class BaseModel implements Serializable {
+public class BaseModel extends PageModel implements Serializable {
     /**
      * 创建者
      */
