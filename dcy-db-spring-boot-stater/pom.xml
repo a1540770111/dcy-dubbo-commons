@@ -42,9 +42,8 @@
 
         <dependency>
             <groupId>io.swagger</groupId>
-            <artifactId>swagger-annotations</artifactId>
+            <artifactId>swagger-models</artifactId>
             <version>${swagger.version}</version>
-<!--            <scope>provided</scope>-->
         </dependency>
 
         <dependency>
