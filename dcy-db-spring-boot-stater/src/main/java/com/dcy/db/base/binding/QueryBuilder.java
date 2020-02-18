@@ -1,9 +1,10 @@
 package com.dcy.db.base.binding;
 
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.dcy.db.base.utils.BeanUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Field;
@@ -17,6 +18,7 @@ import java.util.List;
  */
 @Slf4j
 public class QueryBuilder {
+
     /**
      * Entity或者DTO对象转换为QueryWrapper
      *
@@ -40,7 +42,7 @@ public class QueryBuilder {
      */
     private static <T, DTO> QueryWrapper<T> dtoToWrapper(QueryWrapper wrapper, DTO dto) {
         // 转换
-        List<Field> declaredFields = BeanUtils.extractAllFields(dto.getClass());
+        List<Field> declaredFields = CollUtil.newArrayList(ReflectUtil.getFields(dto.getClass()));
         for (Field field : declaredFields) {
             //忽略static，以及final，transient
             boolean isStatic = Modifier.isStatic(field.getModifiers());
