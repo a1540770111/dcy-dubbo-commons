@@ -1,6 +1,7 @@
 package com.dcy.common.aspect;
 
 import com.alibaba.fastjson.JSON;
+import com.dcy.common.constant.CommonConstant;
 import com.dcy.common.context.BaseContextHandler;
 import com.dcy.common.model.OperationalLog;
 import lombok.extern.slf4j.Slf4j;
@@ -48,9 +49,13 @@ public class WebLogAspect {
         start = System.currentTimeMillis();
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
+        String userId = request.getHeader(CommonConstant.CONTEXT_KEY_USER_ID);
+        String username = request.getHeader(CommonConstant.CONTEXT_KEY_USERNAME);
+        BaseContextHandler.setUserID(userId);
+        BaseContextHandler.setUsername(username);
         operationalLog.setUrl(request.getRequestURI());
         operationalLog.setMethod(joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
-        operationalLog.setOperName(BaseContextHandler.getUsername());
+        operationalLog.setOperName(username);
         if (joinPoint.getArgs().length == 0) {
             operationalLog.setOperParam("{}");
         } else {

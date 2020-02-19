@@ -2,6 +2,7 @@ package com.dcy.feign.config;
 
 import cn.hutool.core.util.StrUtil;
 import com.dcy.common.constant.CommonConstant;
+import com.dcy.feign.interceptor.FeignRequestInterceptor;
 import feign.Feign;
 import feign.Logger;
 import feign.RequestInterceptor;
@@ -49,16 +50,8 @@ public class FeignOkHttpConfig {
         return Logger.Level.FULL;
     }
 
-
     @Bean
-    public RequestInterceptor requestInterceptor() {
-        RequestInterceptor requestInterceptor = template -> {
-            //传递日志traceId
-            String traceId = MDC.get(CommonConstant.LOG_TRACE_ID);
-            if (StrUtil.isNotEmpty(traceId)) {
-                template.header(CommonConstant.TRACE_ID_HEADER, traceId);
-            }
-        };
-        return requestInterceptor;
+    public RequestInterceptor requestInterceptor(){
+        return new FeignRequestInterceptor();
     }
 }
