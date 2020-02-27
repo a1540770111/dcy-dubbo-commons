@@ -1,5 +1,6 @@
 package com.dcy.web.base.service.impl;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -8,12 +9,10 @@ import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.dcy.db.base.binding.QueryBuilder;
-import com.dcy.db.base.model.BaseModel;
 import com.dcy.db.base.model.PageModel;
 import com.dcy.web.base.service.BaseService;
+import com.dcy.web.binding.QueryBuilder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,7 +48,7 @@ public class BaseServiceImpl<M extends BaseMapper<T>, T> extends ServiceImpl<M, 
         pagePlus.setCurrent(pageModel.getCurrent());
         pagePlus.setSize(pageModel.getSize());
         if (StrUtil.isNotBlank(pageModel.getOrder()) && StrUtil.isNotBlank(pageModel.getSort())) {
-            List<OrderItem> orderItems = new ArrayList<OrderItem>();
+            List<OrderItem> orderItems = CollUtil.newArrayList();
             OrderItem orderItem = new OrderItem();
             // 驼峰式转换下划线方式
             orderItem.setColumn(StrUtil.toUnderlineCase(pageModel.getSort()));

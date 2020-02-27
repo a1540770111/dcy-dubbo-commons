@@ -4,7 +4,7 @@ import lombok.Data;
 
 /**
  * @Author：dcy
- * @Description:
+ * @Description: 日志打印实体类
  * @Date: 2019/10/15 9:06
  */
 @Data

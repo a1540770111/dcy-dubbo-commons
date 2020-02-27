@@ -3,7 +3,8 @@ package com.dcy.db.base.model;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableLogic;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 
@@ -12,7 +13,8 @@ import java.io.Serializable;
  * @Description: 公共实体类
  * @Date: 2019/9/6 13:55
  */
-@Data
+@Getter
+@Setter
 public class BaseModel extends PageModel implements Serializable {
     /**
      * 创建者

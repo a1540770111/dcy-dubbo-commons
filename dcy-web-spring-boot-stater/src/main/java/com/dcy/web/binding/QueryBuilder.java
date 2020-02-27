@@ -1,4 +1,4 @@
-package com.dcy.db.base.binding;
+package com.dcy.web.binding;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ReflectUtil;
@@ -40,7 +40,7 @@ public class QueryBuilder {
      * @param <T>
      * @return
      */
-    private static <T, DTO> QueryWrapper<T> dtoToWrapper(QueryWrapper wrapper, DTO dto) {
+    private static <T, DTO> QueryWrapper<T> dtoToWrapper(QueryWrapper<T> wrapper, DTO dto) {
         // 转换
         List<Field> declaredFields = CollUtil.newArrayList(ReflectUtil.getFields(dto.getClass()));
         for (Field field : declaredFields) {
@@ -147,7 +147,12 @@ public class QueryBuilder {
     private static String getColumnName(Field field) {
         String columnName = null;
         if (field.isAnnotationPresent(BindQuery.class)) {
-            columnName = field.getAnnotation(BindQuery.class).field();
+            BindQuery bindQuery = field.getAnnotation(BindQuery.class);
+            if (StrUtil.isNotBlank(bindQuery.alias()) && StrUtil.isNotBlank(bindQuery.field())) {
+                columnName = StrUtil.format("{}.{}", bindQuery.alias(), bindQuery.field());
+            } else {
+                columnName = bindQuery.field();
+            }
         } else if (field.isAnnotationPresent(TableField.class)) {
             columnName = field.getAnnotation(TableField.class).value();
         }

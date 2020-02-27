@@ -23,6 +23,7 @@
         <druid-stater.version>1.1.10</druid-stater.version>
         <springfox.version>2.9.2</springfox.version>
         <fastjson.version>1.2.58</fastjson.version>
+        <mybatis-plus.version>3.2.0</mybatis-plus.version>
     </properties>
     <dependencies>
         <dependency>
@@ -30,20 +31,17 @@
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
-        <!-- 阿里巴巴fastjson，解析json视图 -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>${fastjson.version}</version>
-        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -54,26 +52,31 @@
             <artifactId>druid-spring-boot-starter</artifactId>
             <version>${druid-stater.version}</version>
         </dependency>
+
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>${log4j.version}</version>
         </dependency>
 
-
-        <!-- db 封装 第二版 -->
+        <!-- mq stater-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus.version}</version>
+        </dependency>
+        <!-- db 公共类封装 第二版 -->
         <dependency>
             <groupId>com.dcy</groupId>
             <artifactId>dcy-db-spring-boot-stater</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <!-- 接口文档 -->
 
-        <!-- swagger2 注解-->
+        <!-- common 封装 -->
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>${springfox.version}</version>
+            <groupId>com.dcy</groupId>
+            <artifactId>dcy-common-spring-boot-stater</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
@@ -110,7 +113,6 @@
             <url>http://192.168.136.170:8081/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
-
 
 
     <build>

@@ -39,11 +39,16 @@ public class WebLogAspect {
      * ..表示包及子包 该方法代表controller层的所有方法
      * Pointcut定义时，还可以使用&&、||、! 这三个运算
      */
-    @Pointcut("execution(public * com.dcy.controller..*(..))" + " || execution(public * com.dcy.web.base.controller..*(..))")
+    @Pointcut("execution(public * com.dcy.controller..*(..)) || execution(public * com.dcy.web.base.controller..*(..))")
     public void controllerMethod() {
     }
 
-
+    /**
+     * 前置通知
+     *
+     * @param joinPoint
+     * @throws Exception
+     */
     @Before("controllerMethod()")
     public void logRequestInfo(JoinPoint joinPoint) throws Exception {
         start = System.currentTimeMillis();
@@ -81,7 +86,7 @@ public class WebLogAspect {
         operationalLog.setError(null);
         operationalLog.setResult(JSON.toJSONString(rvt));
         BaseContextHandler.remove();
-        log.info(LOG_PREFIX+" -=- {}", JSON.toJSONString(operationalLog));
+        log.info(LOG_PREFIX + " -=- {}", JSON.toJSONString(operationalLog));
     }
 
     /**
@@ -94,6 +99,7 @@ public class WebLogAspect {
     public void doAfterThrowingAdvice(JoinPoint joinPoint, Throwable exception) {
         operationalLog.setExeTime(System.currentTimeMillis() - start);
         operationalLog.setError(exception.getMessage());
-        log.error(LOG_PREFIX+" -=- {}", JSON.toJSONString(operationalLog));
+        operationalLog.setResult(null);
+        log.error(LOG_PREFIX + " -=- {}", JSON.toJSONString(operationalLog));
     }
 }

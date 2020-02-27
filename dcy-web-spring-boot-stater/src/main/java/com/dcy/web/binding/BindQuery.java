@@ -1,4 +1,4 @@
-package com.dcy.db.base.binding;
+package com.dcy.web.binding;
 
 import java.lang.annotation.*;
 
@@ -15,19 +15,29 @@ public @interface BindQuery {
     /**
      * 查询条件
      * 无@BindQuery注解默认会映射为=条件
+     *
      * @return
      */
     Comparison comparison() default Comparison.EQ;
 
     /**
      * 数据库字段，默认为空，自动根据驼峰转下划线
+     *
      * @return
      */
     String field() default "";
 
     /**
      * 忽略该字段
+     *
      * @return
      */
     boolean ignore() default false;
+
+    /**
+     * 别名
+     *
+     * @return
+     */
+    String alias() default "";
 }

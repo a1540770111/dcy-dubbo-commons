@@ -26,7 +26,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
-    public ResponseData ex(Exception e) {
+    public ResponseData<String> ex(Exception e) {
         return ResponseData.error(e.getMessage());
     }
 
@@ -38,7 +38,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(ValidException.class)
     @ResponseBody
-    public ResponseData valid(ValidException validException) {
+    public ResponseData<String> valid(ValidException validException) {
         return ResponseData.error(validException.getMessage());
     }
 }
