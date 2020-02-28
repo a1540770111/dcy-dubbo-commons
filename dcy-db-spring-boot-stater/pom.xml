@@ -15,15 +15,14 @@
         <java.version>1.8</java.version>
         <maven.compile.source>1.8</maven.compile.source>
         <maven.compile.target>1.8</maven.compile.target>
-        <spring-boot.version>2.1.9.RELEASE</spring-boot.version>
-        <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
+        <spring-boot.version>2.2.2.RELEASE</spring-boot.version>
+        <spring-cloud.version>Hoxton.RELEASE</spring-cloud.version>
         <maven.compile.source>1.8</maven.compile.source>
         <maven.compile.target>1.8</maven.compile.target>
 
         <mybatis-plus.version>3.2.0</mybatis-plus.version>
-        <hutool.version>4.6.1</hutool.version>
+        <hutool.version>5.1.4</hutool.version>
         <swagger.version>1.5.23</swagger.version>
-        <soul-client-springcloud.version>2.1.2-RELEASE</soul-client-springcloud.version>
     </properties>
 
     <dependencies>
