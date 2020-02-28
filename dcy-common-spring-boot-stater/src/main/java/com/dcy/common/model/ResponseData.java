@@ -1,22 +1,16 @@
 package com.dcy.common.model;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @Author：dcy
  * @Description: 返回给前台的通用包装
  * @Date: 2019/8/9 11:40
  */
-@Data
+@Getter
+@Setter
 public class ResponseData<T> {
-    public static final String DEFAULT_SUCCESS_MESSAGE = "请求成功";
-
-    public static final String DEFAULT_ERROR_MESSAGE = "网络异常";
-
-    public static final Integer DEFAULT_SUCCESS_CODE = 200;
-
-    public static final Integer DEFAULT_ERROR_CODE = 500;
-
     /**
      * 请求是否成功
      */
@@ -48,27 +42,39 @@ public class ResponseData<T> {
         this.data = data;
     }
 
+    //=================================成功返回==================================
+
     public static <T> ResponseData<T> success() {
-        return new ResponseData<T>(true, DEFAULT_SUCCESS_CODE, DEFAULT_SUCCESS_MESSAGE, null);
+        return new ResponseData<T>(true, ResponseCode.SUCCESS.getCode(), ResponseCode.SUCCESS.getMsg(), null);
     }
 
     public static <T> ResponseData<T> success(T object) {
-        return new ResponseData<T>(true, DEFAULT_SUCCESS_CODE, DEFAULT_SUCCESS_MESSAGE, object);
+        return new ResponseData<T>(true, ResponseCode.SUCCESS.getCode(), ResponseCode.SUCCESS.getMsg(), object);
     }
 
-    public static <T> ResponseData<T> success(String message, T object) {
-        return new ResponseData<T>(true, DEFAULT_SUCCESS_CODE, message, object);
+    public static <T> ResponseData<T> success(ResponseCode responseCode) {
+        return new ResponseData<T>(true, responseCode.getCode(), responseCode.getMsg(), null);
     }
 
-    public static <T> ResponseData<T> error(String message) {
-        return new ResponseData<T>(false, ResponseData.DEFAULT_ERROR_CODE, message, null);
+    public static <T> ResponseData<T> success(ResponseCode responseCode, T object) {
+        return new ResponseData<T>(true, responseCode.getCode(), responseCode.getMsg(), object);
     }
 
-    public static <T> ResponseData<T> error(Integer code, String message) {
-        return new ResponseData<T>(false, code, message, null);
+    public static <T> ResponseData<T> success(String msg, T object) {
+        return new ResponseData<T>(true, ResponseCode.SUCCESS.getCode(), msg, object);
     }
 
-    public static <T> ResponseData<T> error(Integer code, String message, T object) {
-        return new <T>ResponseData<T>(false, code, message, object);
+    //=================================失败返回==================================
+
+    public static <T> ResponseData<T> error(String msg) {
+        return new ResponseData<T>(false, ResponseCode.ERROR.getCode(), msg, null);
+    }
+
+    public static <T> ResponseData<T> error(Integer code, String msg) {
+        return new ResponseData<T>(false, code, msg, null);
+    }
+
+    public static <T> ResponseData<T> error(ResponseCode responseCode) {
+        return new ResponseData<T>(false, responseCode.getCode(), responseCode.getMsg(), null);
     }
 }
