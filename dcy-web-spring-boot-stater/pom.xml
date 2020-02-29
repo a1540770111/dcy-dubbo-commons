@@ -23,7 +23,7 @@
         <druid-stater.version>1.1.10</druid-stater.version>
         <springfox.version>2.9.2</springfox.version>
         <fastjson.version>1.2.62</fastjson.version>
-        <mybatis-plus.version>3.2.0</mybatis-plus.version>
+        <mybatis-plus.version>3.3.0</mybatis-plus.version>
     </properties>
     <dependencies>
         <dependency>
