@@ -1,13 +1,10 @@
 package com.dcy.feign.config;
 
-import cn.hutool.core.util.StrUtil;
-import com.dcy.common.constant.CommonConstant;
 import com.dcy.feign.interceptor.FeignRequestInterceptor;
 import feign.Feign;
 import feign.Logger;
 import feign.RequestInterceptor;
 import okhttp3.ConnectionPool;
-import org.slf4j.MDC;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.cloud.openfeign.FeignAutoConfiguration;
