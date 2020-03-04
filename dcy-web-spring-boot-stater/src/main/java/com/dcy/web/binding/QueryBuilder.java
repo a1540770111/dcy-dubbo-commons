@@ -90,6 +90,9 @@ public class QueryBuilder {
                         } else if (valueArray.length >= 2) {
                             wrapper.in(columnName, valueArray);
                         }
+                    } else if (value instanceof String && ((String) value).contains(",")) {
+                        String[] valueArray = ((String) value).split(",");
+                        wrapper.in(columnName, valueArray);
                     } else {
                         wrapper.in(columnName, value);
                     }
