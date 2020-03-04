@@ -5,6 +5,8 @@ import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.dcy.db.base.binding.BindQuery;
+import com.dcy.db.base.binding.Comparison;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Field;

@@ -1,4 +1,4 @@
-package com.dcy.web.binding;
+package com.dcy.db.base.binding;
 
 /**
  * @Author：dcy
